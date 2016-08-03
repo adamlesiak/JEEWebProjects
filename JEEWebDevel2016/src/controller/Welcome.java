@@ -15,13 +15,13 @@ public class Welcome {
 	
 	@RequestMapping(value = "/page-1")
 	public ModelAndView page1() {
-		ModelAndView model = new ModelAndView("welcome").addObject("var", "page 1");
+		ModelAndView model = new ModelAndView("page1").addObject("var", "page 1");
 		return model;
 	}
 	
 	@RequestMapping(value = "/page-2")
 	public ModelAndView page2() {
-		ModelAndView model = new ModelAndView("welcome").addObject("var", "page 2");
+		ModelAndView model = new ModelAndView("page2").addObject("var", "page 2");
 		return model;
 	}
 	

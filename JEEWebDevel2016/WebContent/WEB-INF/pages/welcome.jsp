@@ -20,7 +20,6 @@
     </body>
     
     <div data-ng-controller="exampleController">
-	    <p>{{message}}</p>
 	    <a href="/#page-1">Page 1</a>
 	    <a href="/#page-2">Page 2</a>
 	</div>
