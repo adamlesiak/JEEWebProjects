@@ -7,9 +7,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class Welcome {
 
-	@RequestMapping(value = "/welcome")
+	@RequestMapping(value = "/")
 	public ModelAndView welcome() {
 		ModelAndView model = new ModelAndView("welcome").addObject("var", 123);
+		return model;
+	}
+	
+	@RequestMapping(value = "/page-1")
+	public ModelAndView page1() {
+		ModelAndView model = new ModelAndView("welcome").addObject("var", "page 1");
+		return model;
+	}
+	
+	@RequestMapping(value = "/page-2")
+	public ModelAndView page2() {
+		ModelAndView model = new ModelAndView("welcome").addObject("var", "page 2");
 		return model;
 	}
 	
