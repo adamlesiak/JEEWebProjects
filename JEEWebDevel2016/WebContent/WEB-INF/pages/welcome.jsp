@@ -13,6 +13,8 @@
 <body>
 <h1>Welcome</h1>
 
+Test text from branch "test1"
+
 	<body data-ng-app="AngularExample"> 
         <div data-ng-view>
             Loading...
