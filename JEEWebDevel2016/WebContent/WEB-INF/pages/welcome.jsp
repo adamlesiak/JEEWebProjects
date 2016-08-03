@@ -32,7 +32,6 @@
 	    </div>    
 	</div>
 
-
 <script type="text/javascript">
 	angular.module('AngularExample', ['ngRoute']);
 	angular.module('AngularExample').controller('exampleController', function ($scope){
