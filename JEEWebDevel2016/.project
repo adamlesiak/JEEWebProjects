@@ -3,6 +3,7 @@
 	<name>JEEWebDevel2016</name>
 	<comment></comment>
 	<projects>
+		<project>VismaOAuthConnector</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
