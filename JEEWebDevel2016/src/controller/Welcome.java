@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.auth.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,8 +39,8 @@ public class Welcome {
 	
 	String AUTHORIZATION_ENDPOINT = "https://auth-sandbox.test.vismaonline.com/eaccountingapi/oauth/authorize";
 	String TOKEN_ENDPOINT = "https://auth-sandbox.test.vismaonline.com/eaccountingapi/oauth/token";
-	String CLIENT_ID = "svenskaugnslackering";
-	String CLIENT_SECRET = "gFpXegrsa4es4bs7Wg2nnFnWEw7UWxpsD7ZSX6ZA";
+	String CLIENT_ID = "";
+	String CLIENT_SECRET = "";
 	String REDIRECT_URI = "https://localhost:44300/callback";
 	
 	
@@ -56,17 +57,38 @@ public class Welcome {
 	}
 	
 	@RequestMapping(value = "/callback")
-	public ModelAndView callback(HttpServletRequest request) throws IOException {
+	public ModelAndView callback(HttpServletRequest request) throws IOException, AuthenticationException {
 		
 		String codeRequest = request.getParameter("code");
 		
 		Client client = new Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 		ClientDataFetcher clientDataFetcher = new ClientDataFetcher(client, codeRequest);
-		clientDataFetcher.requestAccessToken(TOKEN_ENDPOINT);
-		String accesToken = clientDataFetcher.getAccessToken();
 		
+		Object accesToken_Object = request.getSession().getAttribute("access_token");
+		String accesToken = "";
+		if (accesToken_Object == null) {
+			clientDataFetcher.requestAccessToken(TOKEN_ENDPOINT);
+			accesToken = clientDataFetcher.getAccessToken();
+			request.getSession().setAttribute("access_token", accesToken);
+		} else {
+			accesToken = accesToken_Object.toString();
+		}
+
 		ModelAndView model = new ModelAndView("results").addObject("access_token", accesToken);
 		return model;
+	}
+	
+	@RequestMapping(value = "/send-article")
+	public String sendArticle(HttpServletRequest request) throws IOException {
+		
+		Client client = new Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+		ClientDataFetcher clientDataFetcher = new ClientDataFetcher(client, null);		
+		String JSON = "{\"IsActive\": \"true\", \"Number\": \"No20160805\", \"Name\": \"20160805_03_Name\", \"NameEnglish\": \"Order fee\", \"NetPrice\": \"100\", \"GrossPrice\": \"125\", \"CodingId\": \"9661752e-4a27-4fd4-abb2-0ff63a88d8ae\", \"UnitId\": \"b6344095-57c2-4488-8d6b-44c16cc700b5\", \"UnitName\": \"Styck\", \"StockBalance\": \"0\", \"StockBalanceReserved\": \"0\", \"StockBalanceAvailable\": \"0\",\"HouseWorkType\": null}";
+		
+		Object accesToken_Object = request.getSession().getAttribute("access_token");
+		String accesToken = accesToken_Object.toString();
+		clientDataFetcher.sendDataJSON("https://eaccountingapi-sandbox.test.vismaonline.com/v1/articles", accesToken, JSON);
+		return null;
 	}
 	
 }

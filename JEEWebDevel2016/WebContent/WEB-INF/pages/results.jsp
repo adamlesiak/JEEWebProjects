@@ -9,5 +9,8 @@
 <body>
 <h1>Results</h1>
 Access Token: ${access_token}
+
+<br /><br />
+<a href="/send-article">Send article</a>
 </body>
 </html>
