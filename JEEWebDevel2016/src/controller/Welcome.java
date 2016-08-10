@@ -83,7 +83,7 @@ public class Welcome {
 		
 		Client client = new Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 		ClientDataFetcher clientDataFetcher = new ClientDataFetcher(client, null);		
-		String JSON = "{\"IsActive\": \"true\", \"Number\": \"No20160805\", \"Name\": \"20160805_03_Name\", \"NameEnglish\": \"Order fee\", \"NetPrice\": \"100\", \"GrossPrice\": \"125\", \"CodingId\": \"9661752e-4a27-4fd4-abb2-0ff63a88d8ae\", \"UnitId\": \"b6344095-57c2-4488-8d6b-44c16cc700b5\", \"UnitName\": \"Styck\", \"StockBalance\": \"0\", \"StockBalanceReserved\": \"0\", \"StockBalanceAvailable\": \"0\",\"HouseWorkType\": null}";
+		String JSON = "{\"IsActive\": \"true\", \"Number\": \"No20160810\", \"Name\": \"20160805_03_Name\", \"NameEnglish\": \"Order fee\", \"NetPrice\": \"100\", \"GrossPrice\": \"125\", \"CodingId\": \"9661752e-4a27-4fd4-abb2-0ff63a88d8ae\", \"UnitId\": \"b6344095-57c2-4488-8d6b-44c16cc700b5\", \"UnitName\": \"Styck\", \"StockBalance\": \"0\", \"StockBalanceReserved\": \"0\", \"StockBalanceAvailable\": \"0\",\"HouseWorkType\": null}";
 		
 		Object accesToken_Object = request.getSession().getAttribute("access_token");
 		String accesToken = accesToken_Object.toString();
